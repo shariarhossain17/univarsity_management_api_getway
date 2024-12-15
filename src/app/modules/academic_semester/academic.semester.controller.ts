@@ -28,8 +28,28 @@ const getSingleFromDB = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
+const updateAcademicSemester = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await academicSemesterService.updateAcademicSemester(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteAcademicSemester = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await academicSemesterService.deleteAcademicSemester(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const academicSemesterController = {
   insertIntoDB,
   getFromDB,
-  getSingleFromDB
+  getSingleFromDB,
+  updateAcademicSemester,
+  deleteAcademicSemester
 };

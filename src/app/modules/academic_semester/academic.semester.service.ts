@@ -33,8 +33,37 @@ const getSIngleFromDB = async (req: Request): Promise<IGenericResponse> => {
   return response;
 };
 
+const updateAcademicSemester = async (req: Request): Promise<IGenericResponse> => {
+  const response: IGenericResponse = await HttpService.patch(
+    `/academic-semester/${req.params.id}`,
+    req.body,
+    {
+      headers: {
+        Authorization: req.headers.authorization
+      }
+    }
+  );
+
+  return response;
+};
+
+const deleteAcademicSemester = async (req: Request): Promise<IGenericResponse> => {
+  const response: IGenericResponse = await HttpService.delete(
+    `/academic-semester/${req.params.id}`,
+    {
+      headers: {
+        Authorization: req.headers.authorization
+      }
+    }
+  );
+
+  return response;
+};
+
 export const academicSemesterService = {
   insertIntoDB,
   getFromDB,
-  getSIngleFromDB
+  getSIngleFromDB,
+  updateAcademicSemester,
+  deleteAcademicSemester
 };
