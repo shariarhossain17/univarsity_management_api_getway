@@ -4,7 +4,6 @@ import config from '../config';
 const HttpService = (baseUrl: string): AxiosInstance => {
   const instance = axios.create({
     baseURL: baseUrl,
-    timeout: 1000,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -19,18 +18,21 @@ const HttpService = (baseUrl: string): AxiosInstance => {
     }
   );
 
+  // Response Interceptor
   instance.interceptors.response.use(
     (response) => {
       return response.data;
     },
-
     (error) => {
-      return error;
+      // console.error('Response Error:', error);
+      return Promise.reject(error);
     }
   );
 
   return instance;
 };
 
-export const AuthServiceUrl = HttpService(config.service.auth_url);
-export const CoreServiceUrl = HttpService(config.service.core_url);
+const AuthServiceUrl = HttpService(config.service.auth_url);
+const CoreServiceUrl = HttpService(config.service.core_url);
+
+export { AuthServiceUrl, CoreServiceUrl, HttpService };
