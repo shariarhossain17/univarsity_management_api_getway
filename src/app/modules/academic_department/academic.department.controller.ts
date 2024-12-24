@@ -4,10 +4,7 @@ import { academicDepartMent } from './academic.department.service';
 
 const insertIntoDB = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await academicDepartMent.insertIntoDB(req);
-
-    console.log(result);
-    sendResponse(res, result);
+    const result = await academicDepartMent.insertIntoDB(req, res);
   } catch (error) {
     next(error);
   }

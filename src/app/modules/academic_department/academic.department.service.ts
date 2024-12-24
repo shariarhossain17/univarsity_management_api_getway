@@ -1,15 +1,16 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { IGenericResponse } from '../../../interfaces/common';
 import { CoreServiceUrl, CoreServiceUrl as HttpService } from '../../../shared/axios';
+import sendResponse from '../../../shared/response';
 
-const insertIntoDB = async (req: Request): Promise<IGenericResponse> => {
+const insertIntoDB = async (req: Request, res: Response): Promise<void> => {
   const response: IGenericResponse = await CoreServiceUrl.post('/academic-department', req.body, {
     headers: {
       Authorization: req.headers.authorization
     }
   });
 
-  return response;
+  sendResponse(res, response);
 };
 
 const getFromDB = async (req: Request): Promise<IGenericResponse> => {
