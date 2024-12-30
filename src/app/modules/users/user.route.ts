@@ -6,7 +6,7 @@ import { UserValidation } from './user.validation';
 const router = express.Router();
 
 router.post(
-  '/',
+  '/create-user',
   //auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   FileUploaderHelper.upload.single('file') as unknown as express.RequestHandler,
   (req: Request, res: Response, next: NextFunction) => {

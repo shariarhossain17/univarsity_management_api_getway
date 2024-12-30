@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { ICloudinaryResponse, IUploadFile } from '../../../helpers/file';
 import { FileUploaderHelper } from '../../../helpers/fileUploadeer';
+import { IGenericResponse } from '../../../interfaces/common';
 import { AuthServiceUrl } from '../../../shared/axios';
 
 const insertUser = async (req: Request) => {
@@ -37,6 +38,13 @@ const insertUser = async (req: Request) => {
   if (academicFacultyResponse?.result && Array.isArray(academicFacultyResponse?.result)) {
     req.body.student.academicFaculty = academicFacultyResponse.result[0].id;
   }
+
+  const response: IGenericResponse = await AuthServiceUrl.post('/users/create-student', req.body, {
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
 };
 
 export const userService = {
