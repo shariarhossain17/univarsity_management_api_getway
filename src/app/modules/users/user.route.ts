@@ -5,9 +5,8 @@ import { UserValidation } from './user.validation';
 
 const router = express.Router();
 
-export const userRouter = router;
 router.post(
-  '/create-student',
+  '/',
   //auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   FileUploaderHelper.upload.single('file') as unknown as express.RequestHandler,
   (req: Request, res: Response, next: NextFunction) => {
@@ -15,3 +14,5 @@ router.post(
     return userController.insertUser(req, res, next);
   }
 );
+
+export const userRouter = router;
